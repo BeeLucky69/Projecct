@@ -2,19 +2,21 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import "./Home.css";
 
-export default function Header() {
+export default function Header({ handleLoggedOut }) {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
   };
 
+  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
+
   return (
     <div className="up-menu">
         <h1 className="logo">FOOD SELLER</h1>
         <ul className="links">
             <Link className="link" to={"/"}>Home</Link>
-            <Link className="link" to={"/signup"}>Sign Up</Link>
+            <Link onClick={handleLoggedOut} className="link" to={"/signup"}>{isLoggedIn ? "Log Out" : "Sign Up" }</Link>
              <li onClick={toggleModal} className="link btn">
                 Cart
             </li>

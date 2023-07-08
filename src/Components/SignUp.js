@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Home.css";
 
+
 export default function SignUp({ setLoggedIn }) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
@@ -20,8 +21,9 @@ export default function SignUp({ setLoggedIn }) {
       setLoggedIn(true);
       localStorage.setItem("loggedIn", "true");
       navigate("/");
+      window.location.reload();
     } else {
-      alert("Invalid Name or Password")
+      alert("Please enter your name and password.");
     }
   };
 

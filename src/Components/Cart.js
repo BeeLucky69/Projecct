@@ -1,8 +1,7 @@
 import React, { useEffect } from "react";
 import "./Home.css";
-import { Navigate } from "react-router";
 
-export const Cart = ({ handleLoggedOut, cartItems, handleRemoveProduct, handleCartItemAdding, handleCartItemRemoving }) => {
+export const Cart = ({cartItems, handleRemoveProduct, handleCartItemAdding, handleCartItemRemoving }) => {
   useEffect(() => {
     if (cartItems && cartItems.length > 0) {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -49,7 +48,6 @@ export const Cart = ({ handleLoggedOut, cartItems, handleRemoveProduct, handleCa
           ))}
         </div>
       </div>
-      <button className="LogOut" onClick={handleLoggedOut}>Log Out</button>
     </>
   );
 };

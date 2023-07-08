@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import SignUp from "../Components/SignUp";
 import { Cart } from "../Components/Cart";
 import { data } from "../Components/Data";
-import Purchase from "../Components/Purchase"
+import Header from "../Components/Header";
 
 export default function RouterFunction() {
   const { productItems } = data;
@@ -81,7 +81,9 @@ export default function RouterFunction() {
   };
 
   return (
-    <Routes>
+    <>
+      <Header handleLoggedOut={handleLoggedOut} />
+      <Routes>
         <Route
           path="/"
           element={loggedIn ? (
@@ -121,14 +123,7 @@ export default function RouterFunction() {
             <SignUp setLoggedIn={handleLoggedIn} />
           )}
         />
-        <Route
-          path="/purchase"
-          element={loggedIn ? (
-            <Purchase />
-          ) : (
-            <Navigate to="/signup" replace={true} />
-          )}
-        />
       </Routes>
+    </>
   );
 }
