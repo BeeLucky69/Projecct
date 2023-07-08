@@ -21,7 +21,7 @@ export default function SignUp({ setLoggedIn }) {
       localStorage.setItem("loggedIn", "true");
       navigate("/");
     } else {
-      alert("Please enter your name and password.");
+      alert("Invalid Name or Password")
     }
   };
 

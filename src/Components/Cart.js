@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import "./Home.css";
+import { Navigate } from "react-router";
 
 export const Cart = ({ handleLoggedOut, cartItems, handleRemoveProduct, handleCartItemAdding, handleCartItemRemoving }) => {
   useEffect(() => {
