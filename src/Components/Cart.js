@@ -1,7 +1,22 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import "./Home.css";
 
-export const Cart = ({cartItems, handleRemoveProduct, handleCartItemAdding, handleCartItemRemoving }) => {
+export const Cart = ({cartItems, handleRemoveProduct, handleCartItemAdding, handleCartItemRemoving, setCartItems }) => {
+
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  useEffect(() => {
+    if (cartItems && cartItems.length > 0) {
+      const totalPrice = cartItems.reduce((total, item) => {
+        return total + item.quantity * item.price;
+      }, 0);
+      setTotalPrice(totalPrice);
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    }
+  }, [cartItems]);
+
+  const navigate = useNavigate()
   useEffect(() => {
     if (cartItems && cartItems.length > 0) {
       localStorage.setItem("cartItems", JSON.stringify(cartItems));
@@ -16,6 +31,11 @@ export const Cart = ({cartItems, handleRemoveProduct, handleCartItemAdding, hand
         </div>
       </>
     );
+  }
+
+  const handlePurchase = () => {
+    navigate("/purchase")
+    setCartItems([])
   }
 
   const handleAddOne = (item) => {
@@ -40,12 +60,18 @@ export const Cart = ({cartItems, handleRemoveProduct, handleCartItemAdding, hand
               </button>
               <hr />
               <div>
-                <button className="add-to-cart" onClick={() => handleRemoveProduct(item)}>
+                <button className="remove-from-cart" onClick={() => handleRemoveProduct(item)}>
                   Remove From Cart
                 </button>
               </div>
             </div>
           ))}
+          <div className="total-price">
+            Total: {totalPrice}$
+          </div>
+          <div>
+            <button className="purchase-button" onClick={handlePurchase}>Purchase</button>
+          </div>
         </div>
       </div>
     </>

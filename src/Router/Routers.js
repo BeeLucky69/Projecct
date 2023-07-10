@@ -5,6 +5,7 @@ import SignUp from "../Components/SignUp";
 import { Cart } from "../Components/Cart";
 import { data } from "../Components/Data";
 import Header from "../Components/Header";
+import Purchase from "../Components/Purchase"
 
 export default function RouterFunction() {
   const { productItems } = data;
@@ -82,7 +83,7 @@ export default function RouterFunction() {
 
   return (
     <>
-      <Header handleLoggedOut={handleLoggedOut} />
+      <Header handleLoggedOut={handleLoggedOut} cartItems={cartItems} />
       <Routes>
         <Route
           path="/"
@@ -121,6 +122,14 @@ export default function RouterFunction() {
             <Navigate to="/" replace={true} />
           ) : (
             <SignUp setLoggedIn={handleLoggedIn} />
+          )}
+        />
+        <Route
+          path="/purchase"
+          element={loggedIn ? (
+            <Purchase /> 
+          ) : (
+            <Navigate to={"/signup"} replace={true} />
           )}
         />
       </Routes>

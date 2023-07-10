@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import React, { useState } from "react";
 import "./Home.css";
 
-export default function Header({ handleLoggedOut }) {
+export default function Header({ handleLoggedOut,  cartItems}) {
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
@@ -13,7 +13,7 @@ export default function Header({ handleLoggedOut }) {
 
   return (
     <div className="up-menu">
-        <h1 className="logo">FOOD SELLER</h1>
+        <Link to={"/"} className="logo">FOOD SELLER</Link>
         <ul className="links">
             <Link className="link" to={"/"}>Home</Link>
             <Link onClick={handleLoggedOut} className="link" to={"/signup"}>{isLoggedIn ? "Log Out" : "Sign Up" }</Link>
@@ -22,23 +22,29 @@ export default function Header({ handleLoggedOut }) {
             </li>
         </ul>
 
-            {modal && (
+            {modal && isLoggedIn && (
                 <div className="modal">
                 <div onClick={toggleModal} className="overlay"></div>
                 <div className="modal-content">
-                    <h2>Hello Modal</h2>
-                    <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident
-                    perferendis suscipit officia recusandae, eveniet quaerat assumenda
-                    id fugit, dignissimos maxime non natus placeat illo iusto!
-                    Sapiente dolorum id maiores dolores? Illum pariatur possimus
-                    quaerat ipsum quos molestiae rem aspernatur dicta tenetur. Sunt
-                    placeat tempora vitae enim incidunt porro fuga ea.
-                    </p>
-                    <button className="close-modal" onClick={toggleModal}>
-                    CLOSE
-                    </button>
-                    <Link onClick={toggleModal} className="link" to={"/cart"}>Cart</Link>
+                    <h2 className="modal-cart">Cart</h2>
+                    <div className="modal-items">
+                    {cartItems.map((item, index) => (
+                        <div key={`${item.id}_${index}`} className="card-in-popup">
+                            <img className="cart-popup-images" src={item.image} alt={item.name} />
+                            <div className="cart-popup-name">{item.name}</div>
+                            <div className="cart-popup-price">${item.quantity * item.price}</div>
+                            <div className="cart-popup-quantity">Quantity: {item.quantity}</div>
+                        <div>
+                 </div>
+            </div>
+          ))}
+                    </div>
+                    <div className="modal-buttons">
+                        <Link onClick={toggleModal} className="link" to={"/cart"}>Cart</Link>
+                        <button className="close-modal" onClick={toggleModal}>
+                        CLOSE
+                        </button>
+                    </div>
                 </div>
                 </div>
             )}

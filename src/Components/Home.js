@@ -10,11 +10,17 @@ export default function Home({productItems , handleCartItem}) {
           <img className="home-product-images" src={productItem.image} alt={productItem.name} />
           <h3 className="home-product-name">{productItem.name}</h3>
           <h4 className="home-product-price">${productItem.price}</h4>
-          <div>
-            <button onClick={() => handleCartItem(productItem)} className="add-to-cart">
+          <div>  
+          </div>
+          <h3 className="ingredients">
+            Ingredients: {productItem.info.ingredients}
+          </h3>
+          <h3 className="calories">
+            Calories: {productItem.info.calories}
+          </h3>
+          <button onClick={() => handleCartItem(productItem)} className="add-to-cart">
               Add To Cart
             </button>
-          </div>
         </div>
       ))}
     </>

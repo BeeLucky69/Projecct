@@ -18,10 +18,14 @@ export default function SignUp({ setLoggedIn }) {
 
   const handleSignUp = () => {
     if (name && password) {
-      setLoggedIn(true);
+      if (password.length < 8) {
+        alert("Password can't be shorter than 8 digits")
+      } else {
+        setLoggedIn(true);
       localStorage.setItem("loggedIn", "true");
       navigate("/");
       window.location.reload();
+      }
     } else {
       alert("Please enter your name and password.");
     }
