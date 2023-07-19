@@ -1,11 +1,11 @@
 import React from "react"
 import { Link } from "react-router-dom"
 
-export default function App() {
+export default function Purchase() {
     return (
         <>
             <h1 className="purchase">Thank You For Your Purchase!</h1>
-            <Link to={"/"} className="return-after-purchase">Return To Home</Link>
+            <Link className="return-after-purchase" to={"/"}>Return to home</Link>
         </>
     )
 }
